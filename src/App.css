@@ -1,4 +1,13 @@
 .App {
   background: #fff;
-  padding: 2em;
+}
+
+.heading {
+  text-align: center;
+  color: #000;
+  margin: 0;
+  font-family: "Arial";
+  font-size: 24px;
+  margin: 30px;
+  line-height: 32px;
 }

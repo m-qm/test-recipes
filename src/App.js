@@ -9,6 +9,7 @@ render() {
 
     return (
       <div className="App">
+      <h2 className="heading">Recipe App - Badi Test</h2>
         <SearchInput />      
       </div>
     );

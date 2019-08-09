@@ -28,7 +28,6 @@ class SearchInput extends Component {
           cancelToken: this.cancel.token
         } )
           .then( res => {
-            console.log(res.data)
             const resultNotFoundMsg = ! res.data.results.length
                         ? 'There are no search results. Please type more than 3 characters'
                         : '';
@@ -87,7 +86,7 @@ class SearchInput extends Component {
 		return (
 			
 			<div className="container">
-			<h2 className="heading">Recipe App - Badi Test</h2>
+
 			<label className="search-label" htmlFor="search-input">
 				<i className="fa fa-search search-icon" aria-hidden="true"/>
 

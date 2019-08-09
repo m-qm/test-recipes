@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Title.scss'
+import './Title.css'
 
 export default class Title extends Component {
  render(){
