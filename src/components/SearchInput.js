@@ -28,8 +28,9 @@ class SearchInput extends Component {
           cancelToken: this.cancel.token
         } )
           .then( res => {
+            console.log(res.data)
             const resultNotFoundMsg = ! res.data.results.length
-                        ? 'There are no search results. Please type more than 3 characters'
+                        ? 'There are no search results. Please t'
                         : '';
             this.setState( {
               results: res.data.results,
@@ -58,12 +59,6 @@ class SearchInput extends Component {
 		}
 	};
 
-	/**
-	 * Fetch results according to the prev or next page requests.
-	 *
-	 * @param {String} type 'prev' or 'next'
-	 */
-
 	renderSearchResults = () => {
 		const { results } = this.state;
 
@@ -86,7 +81,6 @@ class SearchInput extends Component {
 		return (
 			
 			<div className="container">
-
 			<label className="search-label" htmlFor="search-input">
 				<i className="fa fa-search search-icon" aria-hidden="true"/>
 
