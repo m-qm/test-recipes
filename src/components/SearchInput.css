@@ -1,0 +1,28 @@
+.container {
+  margin: 36px auto;
+  width: 100%;
+  max-width: 80vw;
+}
+.container input {
+  width: 80%;
+  padding: 16px 30px;
+  font-size: 22px;
+  font-style: italic;
+  color: grey;
+}
+.search-label {
+  position: relative;
+  padding: 30px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 3px;
+  top: calc(50% - 0.5em); /* Keep icon in center of input, regardless of the input height */
+}
+input{
+  padding-left: 17px;
+}
+.input-wrapper{
+  position: relative;
+}
