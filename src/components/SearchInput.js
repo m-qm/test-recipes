@@ -28,7 +28,6 @@ class SearchInput extends Component {
           cancelToken: this.cancel.token
         } )
           .then( res => {
-            console.log(res.data)
             const resultNotFoundMsg = ! res.data.results.length
                         ? 'There are no search results. Please t'
                         : '';
@@ -61,15 +60,13 @@ class SearchInput extends Component {
 
 	renderSearchResults = () => {
 		const { results } = this.state;
-
-    console.log(results)
-
 		if ( Object.keys( results ).length && results.length ) {
 			return (
         <RecipeCard meals={results}/>
 			)
 		}
 	};
+
 
 	render() {
 		const { query,message, error } = this.state;

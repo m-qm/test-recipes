@@ -1,6 +1,7 @@
 .container {
   margin: 0px auto;
   width: 100%;
+  text-align: center;
 }
 .container input {
   padding: 16px 30px;

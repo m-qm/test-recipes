@@ -6,6 +6,12 @@
 /* Create four equal columns */
 .column {
   flex: 50%;
+  justify-content: flex-start;
+  flex-direction: column;
+  display: flex;
+  min-height: 400px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 /* On screens that are 992px wide or less, go from four columns to two columns */
