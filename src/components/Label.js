@@ -7,8 +7,13 @@ class Label extends Component {
   }
   
   displayLabel() {
-    if(this.props.data.indexOf('cheese')) {
-      console.log(this.props.data.indexOf('cheese'))
+
+    if(this.props.data.indexOf('cheese') > -1) {
+      this.setState({
+        hasLactose: true
+      })
+    }
+    if(this.props.data.indexOf('milk') > -1) {
       this.setState({
         hasLactose: true
       })
