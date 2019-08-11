@@ -1,0 +1,8 @@
+.label-container {
+  background-color: red;
+  color: white;
+  position: absolute;
+  transform: rotateY(0deg) rotate(45deg); /* needs Y at 0 deg to behave properly*/
+  transition: transform 2s;
+  right: 0;
+}

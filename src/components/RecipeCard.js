@@ -4,17 +4,12 @@ import Image from './Image';
 import Label from './Label'
 import Ingredients from './Ingredients'
 import FavoriteButton from './FavoriteButton'
-
 import './RecipeCard.css'
 
 
 class RecipeCard extends Component {
 
-
-
-
  render(){
-
 
   return(
     <div className="row">
