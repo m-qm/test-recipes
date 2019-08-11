@@ -17,12 +17,12 @@ class RecipeCard extends Component {
         return (
           <div className="column" key={item.title}>
             <div className="card">
+              <Label data={item.ingredients} />
               <Image source={item.thumbnail} text={item.title} />
               <Title title={item.title} />
               <a href={item.href} className="link">Link</a>
               <Ingredients ingredients={item.ingredients} />
               <FavoriteButton />
-              <Label data={item.ingredients} />
             </div>
           </div>
         )
