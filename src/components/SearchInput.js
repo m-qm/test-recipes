@@ -89,6 +89,11 @@ class SearchInput extends Component {
 					id="search-input"
 					placeholder="Search..."
 					onChange={this.handleOnInputChange}
+					onKeyPress={event => {
+                if (event.key === 'Enter') {
+                  this.fetchSearchResults()
+                }
+							}}
 				/>
 			</label>
 
