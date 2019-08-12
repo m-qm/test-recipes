@@ -1,5 +1,7 @@
 .App {
   background: #fff;
+  font-family: 'Bitter', sans-serif;
+
 
 }
 
@@ -7,7 +9,6 @@
   text-align: center;
   color: #000;
   margin: 0;
-  font-family: "Arial";
   font-size: 24px;
   margin: 30px;
   line-height: 32px;

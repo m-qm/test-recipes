@@ -1,5 +1,6 @@
 .label-container {
-  background-color: red;
+  background-color: brown;
+  font-weight: bold;
   color: white;
   position: absolute;
   transform: rotateY(0deg) rotate(45deg); /* needs Y at 0 deg to behave properly*/
@@ -8,4 +9,8 @@
   height: 20px;
   align-self: center;
   vertical-align: middle;
+  border-top: 1px grey solid; 
+  border-bottom: 1px grey solid;
+  padding: 10px;
+
 }

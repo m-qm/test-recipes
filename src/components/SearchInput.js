@@ -19,6 +19,7 @@ class SearchInput extends Component {
 	}
 
   fetchSearchResults = ( query ) =>{
+		if(this.state.query.length >= 3){
     const searchUrl = `https://badi-recipes.now.sh/api?i=${this.state.query}`;
     if(this.cancel) {
       this.cancel.cancel()
@@ -43,7 +44,7 @@ class SearchInput extends Component {
                 loading: false,
               })
             }
-          } )
+          } )}
   }
 
 
