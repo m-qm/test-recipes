@@ -25,3 +25,10 @@ input{
 .input-wrapper{
   position: relative;
 }
+.search-result-list {
+  display:flex;
+}
+
+.search-result {
+  display: inline;
+}

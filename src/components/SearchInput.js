@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import RecipeCard from './RecipeCard';
+
 import './SearchInput.css';
 
 class SearchInput extends Component {
@@ -21,7 +22,6 @@ class SearchInput extends Component {
   }
 
   fetchSearchResults = () => {
-    console.log (this.state.query.length >= 3);
     if (this.state.query.length >= 3) {
       const searchUrl = `https://badi-recipes.now.sh/api?i=${this.state.query}`;
       if (this.cancel) {
@@ -61,7 +61,6 @@ class SearchInput extends Component {
     } else {
       this.setState ({query, loading: true, message: ''}, () => {
         this.fetchSearchResults ();
-        this.renderSearchList ();
       });
     }
   };
@@ -82,7 +81,6 @@ class SearchInput extends Component {
   };
 
   renderSearchList = () => {
-    const {searches} = this.state;
     let searchList = '';
 
     if (
@@ -91,16 +89,21 @@ class SearchInput extends Component {
     ) {
       searchList = (
         <ul>
-          {searches.splice (0, 5).map (function (query, index) {
+          {this.state.searches.splice (0, 5).map (function (query, index) {
             return (
-              <div key={index}>
-                <div onClick={e => this.setQuery (query)}>{query}</div>
+              <div key={index} className="list-search-result">
+                <div
+                  onClick={e => this.setQuery (query)}
+                  className="search-result"
+                >
+                  {query}
+                </div>
 
                 {' '}
                 <input
                   type="button"
                   value="X"
-                  onClick={e => this.delete (e)}
+                  onClick={this.delete.bind (this)}
                   data-key={index}
                 />
               </div>
@@ -110,9 +113,7 @@ class SearchInput extends Component {
         </ul>
       );
     }
-    if (searches && searches.length) {
-      return searchList;
-    }
+    return searchList;
   };
 
   add = () => {
@@ -122,16 +123,16 @@ class SearchInput extends Component {
       searches.push (query);
       localStorage.setItem ('searches', JSON.stringify (searches));
     } else {
-      var recentSearches = JSON.parse (localStorage.getItem ('searches'));
-      recentSearches.push (query);
-      localStorage.setItem ('searches', JSON.stringify (recentSearches));
+      var searches = JSON.parse (localStorage.getItem ('searches'));
+      searches.push (query);
+      localStorage.setItem ('searches', JSON.stringify (searches));
     }
     this.setState ({
-      searches: JSON.parse (localStorage.getItem ('works')),
+      searches: JSON.parse (localStorage.getItem ('searches')),
     });
   };
 
-  delete = e => {
+  delete (e) {
     var index = e.target.getAttribute ('data-key');
     var list = JSON.parse (localStorage.getItem ('searches'));
     list.splice (index, 1);
@@ -139,7 +140,7 @@ class SearchInput extends Component {
       searches: list,
     });
     localStorage.setItem ('searches', JSON.stringify (list));
-  };
+  }
 
   render () {
     const {query, message, error} = this.state;
@@ -163,7 +164,6 @@ class SearchInput extends Component {
             onKeyPress={event => {
               if (event.key === 'Enter') {
                 this.fetchSearchResults ();
-                this.renderSearchList ();
               }
             }}
           />
@@ -171,11 +171,10 @@ class SearchInput extends Component {
 
         {/*	Error Message*/}
         {message && <p className="message">{message}</p>}
+        {this.renderSearchList ()}
 
         {/*	Render Functions*/}
-        {this.searches}
         {this.renderSearchResults ()}
-        {this.renderSearchList ()}
       </div>
     );
   }
