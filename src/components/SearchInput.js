@@ -174,8 +174,8 @@ class SearchInput extends Component {
 
         {/*	Render Functions*/}
         {this.searches}
-        {this.renderSearchList ()}
         {this.renderSearchResults ()}
+        {this.renderSearchList ()}
       </div>
     );
   }
