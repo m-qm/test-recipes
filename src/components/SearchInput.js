@@ -34,7 +34,7 @@ class SearchInput extends Component {
         })
         .then (res => {
           const resultNotFoundMsg = !res.data.results.length
-            ? 'There are no search results. Please t'
+            ? 'There are no search results. Please try a different keyword!'
             : '';
           this.setState ({
             results: res.data.results,
@@ -100,15 +100,12 @@ class SearchInput extends Component {
     const {query, message, error, searches} = this.state;
 
     let searchList = '';
-    if (
-      localStorage.getItem ('searches') != null ||
-      this.state.searches.length > 0
-    ) {
+    if (localStorage.getItem ('searches') != null || searches.length > 0) {
       searchList = (
         <ul>
           {searches.map (function (search, index) {
             return (
-              <li key={index} onClick={this.fetchSearchResults (search)}>
+              <li key={index}>
                 {search}
                 {' '}
                 <input
