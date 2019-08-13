@@ -20,36 +20,48 @@ class SearchInput extends Component {
     this.cancel = '';
   }
 
-  fetchSearchResults = query => {
-    const searchUrl = `https://badi-recipes.now.sh/api?i=${this.state.query}`;
-    if (this.cancel) {
-      this.cancel.cancel ();
-    }
-    this.cancel = axios.CancelToken.source ();
-    axios
-      .get (searchUrl, {
-        cancelToken: this.cancel.token,
-      })
-      .then (res => {
-        const resultNotFoundMsg = !res.data.results.length
-          ? 'There are no search results. Please type in a different query!'
-          : '';
-        this.setState ({
-          results: res.data.results,
-          message: resultNotFoundMsg,
-          loading: false,
+  fetchSearchResults = () => {
+    console.log (this.state.query.length >= 3);
+    if (this.state.query.length >= 3) {
+      const searchUrl = `https://badi-recipes.now.sh/api?i=${this.state.query}`;
+      if (this.cancel) {
+        this.cancel.cancel ();
+      }
+      this.cancel = axios.CancelToken.source ();
+      axios
+        .get (searchUrl, {
+          cancelToken: this.cancel.token,
+        })
+        .then (res => {
+          const resultNotFoundMsg = !res.data.results.length
+            ? 'There are no search results. Please type in a different query!'
+            : '';
+          this.setState ({
+            results: res.data.results,
+            message: resultNotFoundMsg,
+            loading: false,
+          });
+          this.add ();
+        })
+        .catch (error => {
+          if (axios.isCancel (error) || error) {
+            this.setState ({
+              loading: false,
+            });
+          }
         });
-      });
+    }
   };
 
   handleOnInputChange = (event, prevProps) => {
     const query = event.target.value;
+
     if (!query) {
       this.setState ({query, results: {}, message: ''});
-      this.add ();
     } else {
       this.setState ({query, loading: true, message: ''}, () => {
-        this.fetchSearchResults (query);
+        this.fetchSearchResults ();
+        this.renderSearchList ();
       });
     }
   };
@@ -58,6 +70,48 @@ class SearchInput extends Component {
     const {results} = this.state;
     if (Object.keys (results).length && results.length) {
       return <RecipeCard meals={results} />;
+    }
+  };
+
+  setQuery = (event, query) => {
+    let newQuery = event;
+    this.setState ({
+      query: newQuery,
+    });
+    this.fetchSearchResults (query);
+  };
+
+  renderSearchList = () => {
+    const {searches} = this.state;
+    let searchList = '';
+
+    if (
+      localStorage.getItem ('searches') != null &&
+      this.state.searches != null
+    ) {
+      searchList = (
+        <ul>
+          {searches.splice (0, 5).map (function (query, index) {
+            return (
+              <div key={index}>
+                <div onClick={e => this.setQuery (query)}>{query}</div>
+
+                {' '}
+                <input
+                  type="button"
+                  value="X"
+                  onClick={e => this.delete (e)}
+                  data-key={index}
+                />
+              </div>
+            );
+          }, this)}
+
+        </ul>
+      );
+    }
+    if (searches && searches.length) {
+      return searchList;
     }
   };
 
@@ -77,7 +131,7 @@ class SearchInput extends Component {
     });
   };
 
-  delete (e) {
+  delete = e => {
     var index = e.target.getAttribute ('data-key');
     var list = JSON.parse (localStorage.getItem ('searches'));
     list.splice (index, 1);
@@ -85,41 +139,10 @@ class SearchInput extends Component {
       searches: list,
     });
     localStorage.setItem ('searches', JSON.stringify (list));
-  }
-
-  componentDidMount () {
-    this.add ();
-  }
+  };
 
   render () {
-    const {query, message, error, searches} = this.state;
-    console.log (this.state);
-
-    if (searches != null && searches.length) {
-      let searchList = '';
-      if (localStorage.getItem ('searches')) {
-        console.log (searchList);
-        searchList = (
-          <ul>
-            {this.state.searches.map (function (search, index) {
-              return (
-                <div key={index}>
-                  {searchList}
-                  {' '}
-                  <input
-                    type="button"
-                    value="X"
-                    onClick={this.delete.bind (this)}
-                    data-key={index}
-                  />
-                </div>
-              );
-            }, this)}
-
-          </ul>
-        );
-      }
-    }
+    const {query, message, error} = this.state;
 
     if (error) {
       return <p>{error.message}</p>;
@@ -140,7 +163,7 @@ class SearchInput extends Component {
             onKeyPress={event => {
               if (event.key === 'Enter') {
                 this.fetchSearchResults ();
-                this.add ();
+                this.renderSearchList ();
               }
             }}
           />
@@ -149,8 +172,10 @@ class SearchInput extends Component {
         {/*	Error Message*/}
         {message && <p className="message">{message}</p>}
 
+        {/*	Render Functions*/}
+        {this.searches}
+        {this.renderSearchList ()}
         {this.renderSearchResults ()}
-
       </div>
     );
   }
