@@ -21,41 +21,32 @@ class SearchInput extends Component {
   }
 
   fetchSearchResults = query => {
-    console.log (query);
-    if (this.state.query.length >= 3) {
-      const searchUrl = `https://badi-recipes.now.sh/api?i=${this.state.query}`;
-      if (this.cancel) {
-        this.cancel.cancel ();
-      }
-      this.cancel = axios.CancelToken.source ();
-      axios
-        .get (searchUrl, {
-          cancelToken: this.cancel.token,
-        })
-        .then (res => {
-          const resultNotFoundMsg = !res.data.results.length
-            ? 'There are no search results. Please try a different keyword!'
-            : '';
-          this.setState ({
-            results: res.data.results,
-            message: resultNotFoundMsg,
-            loading: false,
-          });
-        })
-        .catch (error => {
-          if (axios.isCancel (error) || error) {
-            this.setState ({
-              loading: false,
-            });
-          }
-        });
+    const searchUrl = `https://badi-recipes.now.sh/api?i=${this.state.query}`;
+    if (this.cancel) {
+      this.cancel.cancel ();
     }
+    this.cancel = axios.CancelToken.source ();
+    axios
+      .get (searchUrl, {
+        cancelToken: this.cancel.token,
+      })
+      .then (res => {
+        const resultNotFoundMsg = !res.data.results.length
+          ? 'There are no search results. Please type in a different query!'
+          : '';
+        this.setState ({
+          results: res.data.results,
+          message: resultNotFoundMsg,
+          loading: false,
+        });
+      });
   };
 
   handleOnInputChange = (event, prevProps) => {
     const query = event.target.value;
     if (!query) {
       this.setState ({query, results: {}, message: ''});
+      this.add ();
     } else {
       this.setState ({query, loading: true, message: ''}, () => {
         this.fetchSearchResults (query);
@@ -77,9 +68,9 @@ class SearchInput extends Component {
       searches.push (query);
       localStorage.setItem ('searches', JSON.stringify (searches));
     } else {
-      var searches = JSON.parse (localStorage.getItem ('searches'));
-      searches.push (query);
-      localStorage.setItem ('searches', JSON.stringify (searches));
+      var recentSearches = JSON.parse (localStorage.getItem ('searches'));
+      recentSearches.push (query);
+      localStorage.setItem ('searches', JSON.stringify (recentSearches));
     }
     this.setState ({
       searches: JSON.parse (localStorage.getItem ('works')),
@@ -96,29 +87,38 @@ class SearchInput extends Component {
     localStorage.setItem ('searches', JSON.stringify (list));
   }
 
+  componentDidMount () {
+    this.add ();
+  }
+
   render () {
     const {query, message, error, searches} = this.state;
+    console.log (this.state);
 
-    let searchList = '';
-    if (localStorage.getItem ('searches') != null || searches.length > 0) {
-      searchList = (
-        <ul>
-          {searches.map (function (search, index) {
-            return (
-              <li key={index}>
-                {search}
-                {' '}
-                <input
-                  type="button"
-                  value="X"
-                  onClick={this.delete.bind (this)}
-                  data-key={index}
-                />
-              </li>
-            );
-          }, this)}
-        </ul>
-      );
+    if (searches != null && searches.length) {
+      let searchList = '';
+      if (localStorage.getItem ('searches')) {
+        console.log (searchList);
+        searchList = (
+          <ul>
+            {this.state.searches.map (function (search, index) {
+              return (
+                <div key={index}>
+                  {searchList}
+                  {' '}
+                  <input
+                    type="button"
+                    value="X"
+                    onClick={this.delete.bind (this)}
+                    data-key={index}
+                  />
+                </div>
+              );
+            }, this)}
+
+          </ul>
+        );
+      }
     }
 
     if (error) {
@@ -145,14 +145,12 @@ class SearchInput extends Component {
             }}
           />
         </label>
-        {searchList}
-
-        <div className="your-side-bar" />
 
         {/*	Error Message*/}
         {message && <p className="message">{message}</p>}
 
         {this.renderSearchResults ()}
+
       </div>
     );
   }
