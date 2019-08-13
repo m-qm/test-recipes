@@ -13,13 +13,15 @@ class RecipeCard extends Component {
         {this.props.meals.map ((item, index) => {
           return (
             <div className="column" key={index}>
-              <div className="card">
-                <Label data={item.ingredients} />
-                <Image source={item.thumbnail} text={item.title} />
-                <Title title={item.title} />
-                <a href={item.href} className="link">Link</a>
-                <Ingredients ingredients={item.ingredients} />
-                <FavoriteButton />
+              <div className="card-container">
+                <div className="card">
+                  <Label data={item.ingredients} />
+                  <Image source={item.thumbnail} text={item.title} />
+                  <Title title={item.title} />
+                  <a href={item.href} className="link">Link</a>
+                  <Ingredients ingredients={item.ingredients} />
+                  <FavoriteButton />
+                </div>
               </div>
             </div>
           );

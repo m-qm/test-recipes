@@ -123,6 +123,7 @@ class SearchInput extends Component {
       searches.push (query);
       localStorage.setItem ('searches', JSON.stringify (searches));
     } else {
+      // eslint-disable-next-line
       var searches = JSON.parse (localStorage.getItem ('searches'));
       searches.push (query);
       localStorage.setItem ('searches', JSON.stringify (searches));
@@ -156,6 +157,7 @@ class SearchInput extends Component {
 
           <input
             type="text"
+            className="input-check"
             name="query"
             value={query}
             id="search-input"
@@ -171,7 +173,16 @@ class SearchInput extends Component {
 
         {/*	Error Message*/}
         {message && <p className="message">{message}</p>}
-        {this.renderSearchList ()}
+        <div className="search-query-list">
+          {this.state.searches.length > 0
+            ? <div className="search-query-title">
+                Previous searches:
+              </div>
+            : <div className="no-searches">
+                Enter a search keyword & press Enter
+              </div>}
+          {this.renderSearchList ()}
+        </div>
 
         {/*	Render Functions*/}
         {this.renderSearchResults ()}

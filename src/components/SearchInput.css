@@ -23,12 +23,15 @@ input{
   padding-left: 17px;
 }
 .input-wrapper{
-  position: relative;
+  position: fixed;
 }
 .search-result-list {
   display:flex;
 }
 
+.search-query-list {
+  padding: 30px;
+}
 .search-result {
   display: inline;
 }
