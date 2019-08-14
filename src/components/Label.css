@@ -2,14 +2,29 @@
   background-color:#e9c8bc;
   font-weight: bold;
   color: white;
-  position: absolute;
+  display: flex;
+  align-self: flex-end;
   transform: rotateY(0deg) rotate(45deg); /* needs Y at 0 deg to behave properly*/
   transition: transform 2s;
   right: 10px;
   height: 20px;
-  align-self: center;
   vertical-align: middle;
   border-right: 0.5px #7a6a64 solid;
   padding: 10px;
+  position: absolute;
+
+}
+
+@media screen and (max-width: 600px) {
+
+    .label-container {
+    border-radius: 19px;
+    height: 20px;
+    align-self: center;
+    margin: 53px 4px;
+    right: -8px;
+    padding: 10px;
+
+    }
 
 }
