@@ -171,8 +171,6 @@ class SearchInput extends Component {
           />
         </label>
 
-        {/*	Error Message*/}
-        {message && <p className="message">{message}</p>}
         <div className="search-query-list">
           {this.state.searches.length > 0
             ? <div className="search-query-title">
@@ -183,6 +181,8 @@ class SearchInput extends Component {
               </div>}
           {this.renderSearchList ()}
         </div>
+        {/*	Error Message*/}
+        {message && <p className="message">{message}</p>}
 
         {/*	Render Functions*/}
         {this.renderSearchResults ()}

@@ -30,8 +30,12 @@ input{
 }
 
 .search-query-list {
-  padding: 30px;
+  padding: 24px;
 }
 .search-result {
   display: inline;
+}
+
+.message {
+  margin-top: 22vh;
 }

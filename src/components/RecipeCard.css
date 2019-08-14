@@ -36,8 +36,10 @@
 @media screen and (max-width: 600px) {
   .row {
     flex-direction: column;
+
   }
   .column {
     height: 100%;
+    margin: 0;
   }
 }
