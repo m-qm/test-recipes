@@ -36,8 +36,8 @@ The card component contains all the sections of Title, Image, Ingredients, Label
 
 ├── Tests                    # Test files #   
 ├── Utils                    # Scripts #     
-│   ├── App         
-│      ├── components        
+├── App         
+│   ├── components        
 │           └── SearchInput
 │           └── RecipeCard
 │                          └── Title
