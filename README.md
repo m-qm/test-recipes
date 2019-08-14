@@ -49,7 +49,8 @@ The card component contains all the sections of Title, Image, Ingredients, Label
 
 ## Reason of choices
 
+My intention was to use the least amount possible of libraries. The styling is made with css only.
 
+## TO DO's
 
-
-
+The Search Input component could be destructured in smaller ones.

@@ -14,14 +14,14 @@ class RecipeCard extends Component {
           return (
             <div className="column" key={index}>
               <div className="card-container">
-                <div className="card">
-                  <Label data={item.ingredients} />
-                  <Image source={item.thumbnail} text={item.title} />
+                <Label data={item.ingredients} />
+                <Image source={item.thumbnail} text={item.title} />
+                <div className="card-info">
                   <Title title={item.title} />
-                  <a href={item.href} className="link">Link</a>
-                  <Ingredients ingredients={item.ingredients} />
+                  {/* <a href={item.href} className="link">Link</a> */}
                   <FavoriteButton />
                 </div>
+                <Ingredients ingredients={item.ingredients} />
               </div>
             </div>
           );
