@@ -6,7 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-## `npm i``
+## `npm i`
 
 Installs the required libraries for running the project.
 
@@ -40,10 +40,10 @@ The card component contains all the sections of Title, Image, Ingredients, Label
 │      ├── components        
 │           └── SearchInput
 │           └── RecipeCard
-│                 └── Title
-│                 └── Image
-│                 └── Ingredients
-│                 └── Label
+│                          └── Title
+│                          └── Image
+│                          └── Ingredients
+│                          └── Label
 |__________________________
 
 
