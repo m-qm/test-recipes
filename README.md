@@ -49,8 +49,28 @@ The card component contains all the sections of Title, Image, Ingredients, Label
 
 ## Reason of choices
 
-My intention was to use the least amount possible of libraries. The styling is made with css only.
+The styling is made with CSS only.
+
+Axios is being used for querying the API.
+
+Previous search results are being stored with Local Storage
+
+Only the first 5 results are being shown
+
+It is recommended to clear Local Storage every once in a while in order to prevent bugs
+
 
 ## TO DO's
 
-The Search Input component could be destructured in smaller ones.
+ * Destructure the Search Input component in smaller ones
+
+ * Allow user to search and filter results by meal / ingredient
+
+ * More CSS and media queries to optimize the responsiveness
+
+ * Some styling and Dropdown component for previous searches
+
+ * Logic of favorite recipes + User Profile 
+
+ * Backend with Node and MongoDB for storing the queries and user favorites
+

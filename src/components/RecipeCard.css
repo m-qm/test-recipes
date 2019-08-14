@@ -23,6 +23,11 @@
   display: flex;
   flex-direction: column;
 }
+.list-search-result {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
 
 
 /* On screens that are 992px wide or less, go from four columns to two columns */

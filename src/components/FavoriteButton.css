@@ -10,3 +10,11 @@
   font-size: 16px;
   border-radius: 17px;
 }
+
+
+@media screen and (max-width: 600px) {
+
+  .favorite-button {
+  padding: 10px;
+  }
+}
